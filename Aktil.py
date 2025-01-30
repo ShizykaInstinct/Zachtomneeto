@@ -2,12 +2,20 @@ import os
 import asyncio
 import requests
 from aiogram import Bot, Dispatcher, types
+from dotenv import load_dotenv  # Импортируем библиотеку для работы с .env
 
-TOKEN = os.getenv("7725771729:AAENWAle-ClInzhQPbCEJLZbAL7Ezwkdjd8")  # Telegram API Token
-HF_API_KEY = os.getenv("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")  # Hugging Face API Key
+# Загружаем переменные окружения из файла .env (если он существует)
+load_dotenv()
+
+# Получаем токены из переменных окружения
+TOKEN = os.getenv("TELEGRAM_TOKEN")  # Токен Telegram API
+HF_API_KEY = os.getenv("HF_API_KEY")  # Токен Hugging Face API
+
+if not TOKEN or not HF_API_KEY:
+    raise ValueError("Telegram token or Hugging Face API key not found. Make sure to set them in environment variables or .env file.")
 
 bot = Bot(token=TOKEN)
-dp = Dispatcher()
+dp = Dispatcher(bot)
 
 # Функция для отправки запроса к Hugging Face
 def chat_with_ai(text):
@@ -27,7 +35,7 @@ async def message_handler(message: types.Message):
     await message.answer(reply)
 
 async def main():
-    await dp.start_polling(bot)
+    await dp.start_polling()
 
 if __name__ == "__main__":
     asyncio.run(main())
