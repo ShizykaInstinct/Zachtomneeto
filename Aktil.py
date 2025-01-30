@@ -8,8 +8,8 @@ from dotenv import load_dotenv  # Импортируем библиотеку д
 load_dotenv()
 
 # Получаем токены из переменных окружения
-TOKEN = os.getenv("TELEGRAM_TOKEN")  # Токен Telegram API
-HF_API_KEY = os.getenv("HF_API_KEY")  # Токен Hugging Face API
+TOKEN = os.getenv("7725771729:AAENWAle-ClInzhQPbCEJLZbAL7Ezwkdjd8")  # Токен Telegram API
+HF_API_KEY = os.getenv("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")  # Токен Hugging Face API
 
 if not TOKEN or not HF_API_KEY:
     raise ValueError("Telegram token or Hugging Face API key not found. Make sure to set them in environment variables or .env file.")
